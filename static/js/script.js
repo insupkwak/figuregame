@@ -28,11 +28,14 @@ startGameButton.addEventListener('click', function(event) {
     // 게임 설명 업데이트
     updateGameDescription(selectedOption);
    
+    console.log(selectedOption)
 
     // 생성된 랜덤한 숫자를 저장 (최초 게임 시작 시 한 번만 생성)
    
         randomNum = generateRandomNumber(parseInt(selectedOption));
     
+        console.log(randomNum)
+
 
     digitForm.style.display = 'none';
     endGameForm.style.display = 'block';
