@@ -24,7 +24,9 @@ h1 {
     padding: 20px;
     margin: 0 auto; /* 가운데 정렬을 위해 auto로 설정 */
     text-align: center; /* 폼 안의 요소들을 가운데 정렬합니다 */
-    margin-top: 30px;
+    margin-top: 0px ;
+    height: 100px;
+    line-height: 100px; /* 높이에 맞춰 텍스트 수직 정렬 */
 }
 
 

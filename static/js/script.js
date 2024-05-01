@@ -100,13 +100,13 @@ document.getElementById('inputForm').addEventListener('submit', function(event) 
     let result = compareNumbers(parseInt(inputData), randomNum, selectedOption);
 
 
-    // 게임 로그에 결과 추가
+    // 정답을 맞추지 않았고, 전송 횟수가 50회 미만일 때만 로그에 결과 추가
+    if (result !== "정답" && attempts < 50) {
     addToGameLog(attempts, inputData, result);
- 
+}
 
-
-    // 최대 전송 횟수(30회)를 초과하면 게임 종료
-    if (attempts >= 30) {
+    // 최대 전송 횟수(50회)를 초과하면 게임 종료
+    if (attempts >= 50) {
         endGame();
     }
 });
@@ -155,14 +155,18 @@ function compareNumbers(guess, target, digits) {
         let username = prompt("축하합니다! 이름을 입력해 주세요:", "이름"); // 사용자 이름 입력 받기
         if (username) {
             saveAttemptToBackend(digits, attempts, username); // 백엔드로 데이터 전송
+            endGame(); // 게임 종료 호출
+        } else {
+            // 사용자가 이름을 입력하지 않았을 때도 게임 종료
+            endGame(); // 게임 종료 호출
         }
         return "정답"
     } else if (guess > target) {
         alert('보다 작습니다.');
-        return ">"
+        return "보다 작다."
     } else {
         alert('보다 큽니다.');
-        return "<"
+        return "보다 크다."
     }
 }
 
@@ -196,6 +200,9 @@ function endGame() {
 
     // 게임 설명 업데이트
     gameDescription.textContent = '게임 종료';
+
+    // 전송 횟수 초기화
+    attempts = 0;  // 게임 재시작을 위해 전송 횟수를 0으로 리셋
 
     // 게임 시작 버튼 활성화
     startGameButton.disabled = false;

@@ -1,6 +1,7 @@
 import json
 from flask import Flask, request, jsonify, render_template
-from datetime import datetime
+from datetime import datetime, timedelta
+
 
 
 
@@ -34,11 +35,12 @@ def record_attempt():
     if not data or not all(key in data for key in ['digits', 'attempts', 'username']):
         return jsonify({'error': 'Missing data'}), 400
 
-    data['timestamp'] = datetime.now()
+    now_utc = datetime.utcnow()
+    now_korea = now_utc + timedelta(hours=9)
+    data['timestamp'] = now_korea.isoformat()  # ISO 형식으로 문자열 변환
+
+   
     attempts_log.append(data)
-
-
-    print(attempts_log)
 
     save_data(attempts_log)  # 데이터를 파일에 저장
 
