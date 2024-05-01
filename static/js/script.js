@@ -163,10 +163,10 @@ function compareNumbers(guess, target, digits) {
         return "정답"
     } else if (guess > target) {
         alert('보다 작습니다.');
-        return "보다 작다."
+        return "보다 작음"
     } else {
         alert('보다 큽니다.');
-        return "보다 크다."
+        return "보다 큼"
     }
 }
 
